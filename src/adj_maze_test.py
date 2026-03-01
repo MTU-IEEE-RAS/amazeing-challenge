@@ -6,5 +6,5 @@ generator = AldousBroderGenerator()
 maze = generator.generate_maze(5,5)
 
 maze.print_adjacency_list()
-print(maze.get_edges((0,0)))
 maze.print_maze()
+print(generator.generate_start_and_goal(maze))
