@@ -33,6 +33,9 @@ class AdjacencyListMaze(Maze):
             edges.append([n,v_2d])
 
         return edges
+
+    def get_length(self) -> int:
+        return self.length
     
     def get_node_coordinate(self, v):
         return (v // self.width, v % self.width)
@@ -62,6 +65,9 @@ class AdjacencyListMaze(Maze):
         for i in range(self.node_count):
             node_list.append(self.get_node_coordinate(i))
         return node_list
+    
+    def get_width(self) -> int:
+        return self.width
 
     def has_edge(self,n1:tuple, n2:tuple) -> bool:
         v1 = self.get_adj_list_idx(n1)

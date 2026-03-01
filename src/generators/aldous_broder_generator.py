@@ -5,6 +5,7 @@ from random import randint
 class AldousBroderGenerator(Generator):
 
     def generate_maze(self,length,width) -> Maze:
+
         maze = AdjacencyListMaze(length,width)
 
         unvisited = maze.get_nodes()
@@ -23,10 +24,10 @@ class AldousBroderGenerator(Generator):
 
             current_node = neighbor
 
-            print(len(unvisited))
-
         return maze
         
 
     def generate_start_and_goal(self,maze : Maze) -> tuple:
-        pass
+        start = (randint(0,maze.get_length()-1), randint(0,maze.get_width()-1))
+        end = (randint(0,maze.get_length()-1), randint(0,maze.get_width()-1))
+        return (start,end)
