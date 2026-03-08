@@ -4,9 +4,9 @@ from random import randint
 
 class AldousBroderGenerator(Generator):
 
-    def generate_maze(self,length,width) -> Maze:
+    def generate_maze(self,rows,cols) -> Maze:
 
-        maze = AdjacencyListMaze(length,width)
+        maze = AdjacencyListMaze(rows,cols)
 
         unvisited = maze.get_nodes()
 
@@ -28,6 +28,6 @@ class AldousBroderGenerator(Generator):
         
 
     def generate_start_and_goal(self,maze : Maze) -> tuple:
-        start = (randint(0,maze.get_length()-1), randint(0,maze.get_width()-1))
-        end = (randint(0,maze.get_length()-1), randint(0,maze.get_width()-1))
+        start = (randint(0,maze.get_rows()-1), randint(0,maze.get_rows()-1))
+        end = (randint(0,maze.get_rows()-1), randint(0,maze.get_rows()-1))
         return (start,end)

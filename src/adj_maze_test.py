@@ -4,8 +4,10 @@ from generators.wilsons_generator import WilsonsGenerator
 
 generator = WilsonsGenerator()
 
-maze = generator.generate_maze(20,20)
+maze = generator.generate_maze(5,5)
 
 maze.print_adjacency_list()
 maze.print_maze()
 print(generator.generate_start_and_goal(maze))
+
+print(maze.get_edges((0,1)))

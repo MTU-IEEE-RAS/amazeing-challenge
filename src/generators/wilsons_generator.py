@@ -5,9 +5,9 @@ from random import randint
 # Implements Wilson's Algorithm (https://weblog.jamisbuck.org/2011/1/20/maze-generation-wilson-s-algorithm)
 class WilsonsGenerator(Generator):
 
-    def generate_maze(self,length,width) -> Maze:
+    def generate_maze(self,rows,cols) -> Maze:
         # Initialize
-        maze = AdjacencyListMaze(length,width)
+        maze = AdjacencyListMaze(rows,cols)
         unvisited = maze.get_nodes()
         ust = []
 
@@ -59,6 +59,6 @@ class WilsonsGenerator(Generator):
         return None
         
     def generate_start_and_goal(self,maze : Maze) -> tuple:
-        start = (randint(0,maze.get_length()-1), randint(0,maze.get_width()-1))
-        end = (randint(0,maze.get_length()-1), randint(0,maze.get_width()-1))
+        start = (randint(0,maze.get_rows()-1), randint(0,maze.get_cols()-1))
+        end = (randint(0,maze.get_rows()-1), randint(0,maze.get_cols()-1))
         return (start,end)

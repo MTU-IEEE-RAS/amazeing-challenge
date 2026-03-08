@@ -1,10 +1,10 @@
 from contracts import Maze
 
 class AdjacencyListMaze(Maze):
-    def __init__(self,length,width):
-        self.length = length
-        self.width = width
-        self.node_count = self.length*self.width
+    def __init__(self,rows,cols):
+        self.rows = rows
+        self.cols = cols
+        self.node_count = self.rows*self.cols
         self.adjacency_list = {}
 
         for i in range(self.node_count):
@@ -24,21 +24,22 @@ class AdjacencyListMaze(Maze):
         self.adjacency_list[n2_idx].append(n1_idx)
 
     def get_adj_list_idx(self, n: tuple) -> int:
-        return n[1] + n[0]*self.width
+        return n[1] + n[0]*self.cols
     
     def get_edges(self,n:tuple) -> list:
         edges = []
+        print(self.adjacency_list[self.get_adj_list_idx(n)])
         for v in self.adjacency_list[self.get_adj_list_idx(n)]:
-            v_2d = self.get_node_coordinate(v)
-            edges.append([n,v_2d])
+            n2 = self.get_node_coordinate(v)
+            edges.append([n,n2])
 
         return edges
 
-    def get_length(self) -> int:
-        return self.length
+    def get_rows(self) -> int:
+        return self.rows
     
     def get_node_coordinate(self, v):
-        return (v // self.width, v % self.width)
+        return (v // self.cols, v % self.cols)
 
     def get_node_neighbors(self, n: tuple) -> list:
         neighbors = []
@@ -50,11 +51,11 @@ class AdjacencyListMaze(Maze):
 
         if left_idx >= 0:
             neighbors.append((left_idx,n[1]))
-        if right_idx < self.length:
+        if right_idx < self.rows:
             neighbors.append((right_idx,n[1]))
         if up_idx >= 0:
             neighbors.append((n[0],up_idx))
-        if down_idx < self.width:
+        if down_idx < self.cols:
             neighbors.append((n[0],down_idx))
 
         return neighbors
@@ -66,8 +67,8 @@ class AdjacencyListMaze(Maze):
             node_list.append(self.get_node_coordinate(i))
         return node_list
     
-    def get_width(self) -> int:
-        return self.width
+    def get_cols(self) -> int:
+        return self.cols
 
     def has_edge(self,n1:tuple, n2:tuple) -> bool:
         v1 = self.get_adj_list_idx(n1)
@@ -83,7 +84,7 @@ class AdjacencyListMaze(Maze):
 
         # The row and column numbers only print nicely for single digits for now...
         print_numbers = False
-        if(self.width < 10 and self.length < 10):
+        if(self.cols < 10 and self.rows < 10):
             print_numbers = True
         
         wall = "██"
@@ -92,19 +93,19 @@ class AdjacencyListMaze(Maze):
         maze_string = "  "
 
         hor_border_string = "  "
-        for i in range(self.width*2+1):
+        for i in range(self.cols*2+1):
             hor_border_string += wall
         hor_border_string += "\n"
 
         if(print_numbers):
-            for i in range(self.width):
+            for i in range(self.cols):
                 maze_string += f"  {i} "
 
         maze_string += "\n"
 
         maze_string += hor_border_string
 
-        for i in range(self.length):
+        for i in range(self.rows):
 
             if(print_numbers):
                 maze_string += f"{i} " + wall
@@ -112,7 +113,7 @@ class AdjacencyListMaze(Maze):
                 maze_string += "  " + wall
 
             # Check right neighbor
-            for j in range(self.width-1):
+            for j in range(self.cols-1):
                 maze_string += path
 
                 if not self.has_edge((i,j),(i,j+1)):
@@ -123,12 +124,12 @@ class AdjacencyListMaze(Maze):
             maze_string += path + wall + "\n"
 
             # Check down neighbor
-            if i >= self.length-1:
+            if i >= self.rows-1:
                 break
 
             maze_string += "  " + wall
 
-            for j in range(self.width):
+            for j in range(self.cols):
                 if not self.has_edge((i,j),(i+1,j)):
                     maze_string += wall
                 else:
