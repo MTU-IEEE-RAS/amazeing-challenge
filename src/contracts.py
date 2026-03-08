@@ -15,6 +15,10 @@ class Maze(ABC):
     def has_edge(self,n1,n2) -> bool:
         pass
 
+    @abstractmethod
+    def get_edges(self,n) -> list:
+        pass
+
 class Generator(ABC):
 
     @abstractmethod
