@@ -39,21 +39,32 @@ class Tester:
 
         # Solve maze, measure time elapsed
         start_time = time.perf_counter()
-        solution = self.solver.solve(maze,start,goal)
-        end_time = time.perf_counter()
+        results = []
+        try:
+            while True:
+                solution = next(self.solver.solve(maze, start, goal))
+                end_time = time.perf_counter()
+                results.append({"solution": solution,
+                                "end_time": end_time})
+        except StopIteration as e:
+            pass
+            # Finished iterating!
 
-        # Check validity of solution, generate statistics
-        (is_valid_solution, path_length) = self.validate_solution(maze,start,goal,solution)
-        time_elapsed = end_time - start_time
+        evals = []
+        for result in results:
+            # Check validity of solution, generate statistics
+            (is_valid_solution, path_length) = self.validate_solution(maze,start,goal,result["solution"])
+            time_elapsed = result["end_time"] - start_time
 
-        results = {'maze' : maze,
-                   'solution' : solution,
-                   'is_valid_solution' : is_valid_solution,
-                   'time_elapsed' : time_elapsed,
-                   'path_length' : path_length}
+            evaluation = {'maze' : maze,
+                    'solution' : result["solution"],
+                    'is_valid_solution' : is_valid_solution,
+                    'time_elapsed' : time_elapsed,
+                    'path_length' : path_length}
 
-        if self.verbose and results['is_valid_solution']:
-            print(f"Elapsed Time:  {results['time_elapsed']}")
-            print(f"Path Length:   {results['path_length']}")
+            if self.verbose and evaluation['is_valid_solution']:
+                print(f"Elapsed Time:  {results['time_elapsed']}")
+                print(f"Path Length:   {results['path_length']}")
+            evals.append(evaluation)
 
-        return results
+        return evals
