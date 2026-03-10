@@ -1,5 +1,5 @@
-from contracts import Generator, Maze
-from mazes.adjacency_list_maze import AdjacencyListMaze
+from ..contracts import Generator, Maze
+from ..mazes.adjacency_list_maze import AdjacencyListMaze
 from random import randint
 
 # Implements Wilson's Algorithm (https://weblog.jamisbuck.org/2011/1/20/maze-generation-wilson-s-algorithm)

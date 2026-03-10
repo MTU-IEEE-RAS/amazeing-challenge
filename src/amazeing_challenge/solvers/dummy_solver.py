@@ -1,4 +1,4 @@
-from contracts import Solver, Maze
+from ..contracts import Solver, Maze
 
 class DummySolver(Solver):
 

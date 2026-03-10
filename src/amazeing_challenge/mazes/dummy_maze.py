@@ -1,4 +1,4 @@
-from contracts import Maze
+from ..contracts import Maze
 
 class DummyMaze(Maze):
 

@@ -1,5 +1,5 @@
-from contracts import Generator, Maze
-from mazes.adjacency_list_maze import AdjacencyListMaze
+from ..contracts import Generator, Maze
+from ..mazes.adjacency_list_maze import AdjacencyListMaze
 from random import randint
 
 class AldousBroderGenerator(Generator):

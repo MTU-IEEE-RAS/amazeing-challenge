@@ -1,5 +1,5 @@
-from contracts import Generator, Maze
-from mazes.dummy_maze import DummyMaze
+from ..contracts import Generator, Maze
+from ..mazes.dummy_maze import DummyMaze
 
 class DummyGenerator(Generator):
 
