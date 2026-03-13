@@ -26,7 +26,7 @@ class Generator(ABC):
     """
 
     @abstractmethod
-    def generate_maze(self) -> Maze:
+    def generate_maze(self, seed=None) -> Maze:
         pass
 
     @abstractmethod
