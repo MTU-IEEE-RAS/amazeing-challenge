@@ -1,6 +1,6 @@
-from generators.dummy_generator import DummyGenerator
-from solvers.dummy_solver import DummySolver
-from tester import Tester
+from .generators.dummy_generator import DummyGenerator
+from .solvers.dummy_solver import DummySolver
+from .tester import Tester
 
 generator = DummyGenerator()
 solver = DummySolver()

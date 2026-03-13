@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 import time
 
 class Maze(ABC):
+    """Abstract Class for Maze
+    """
 
     @abstractmethod
     def add_edge(self,n1,n2):
@@ -20,6 +22,8 @@ class Maze(ABC):
         pass
 
 class Generator(ABC):
+    """Abstract class for Maze Generators
+    """
 
     @abstractmethod
     def generate_maze(self) -> Maze:
@@ -30,6 +34,8 @@ class Generator(ABC):
         pass
 
 class Solver:
+    """Abstract class for Solvers
+    """
 
     @abstractmethod
     def solve(self, maze : Maze, start, goal) -> list:

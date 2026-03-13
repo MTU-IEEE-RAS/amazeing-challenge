@@ -10,3 +10,6 @@ class DummyMaze(Maze):
 
     def has_edge(self,n1, n2):
         pass
+
+    def get_edges(self,n):
+        pass

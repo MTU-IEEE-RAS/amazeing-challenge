@@ -1,5 +1,5 @@
 import time
-from contracts import Generator, Solver, Maze
+from .contracts import Generator, Solver, Maze
 
 
 class Tester:
@@ -42,7 +42,7 @@ class Tester:
         results = []
         try:
             while True:
-                solution = next(self.solver.solve(maze, start, goal))
+                solution = next(iter(self.solver.solve(maze, start, goal)))
                 end_time = time.perf_counter()
                 results.append({"solution": solution,
                                 "end_time": end_time})
