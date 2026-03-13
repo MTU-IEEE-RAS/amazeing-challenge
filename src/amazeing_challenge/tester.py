@@ -32,10 +32,17 @@ class Tester:
         path_length = len(solution) - 1
         return (True, path_length)
 
-    def test(self) -> dict:
+    def test(self,input_maze_config=(None,(None,None))) -> dict:
+        """
+        Tests a solver on a given or generated maze configuration
+        """
         # Generate maze
-        maze = self.generator.generate_maze()
-        (start,goal) = self.generator.generate_start_and_goal(maze)
+
+        maze, (start,goal) = input_maze_config
+
+        if type(maze) != Maze:
+            maze = self.generator.generate_maze()
+            (start,goal) = self.generator.generate_start_and_goal(maze)
 
         # Solve maze, measure time elapsed
         start_time = time.perf_counter()
