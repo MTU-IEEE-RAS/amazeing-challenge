@@ -5,7 +5,7 @@ import random
 # Implements Wilson's Algorithm (https://weblog.jamisbuck.org/2011/1/20/maze-generation-wilson-s-algorithm)
 class WilsonsGenerator(Generator):
 
-    def generate_maze(self,seed=None,rows=5,cols=5) -> Maze:
+    def generate_maze(self,seed=None,rows=5,cols=5,additional_edges=0) -> Maze:
         # Initialize
         maze = AdjacencyListMaze(rows,cols)
         unvisited = maze.get_nodes()
@@ -43,7 +43,7 @@ class WilsonsGenerator(Generator):
 
                 # Exit once all nodes are in UST
                 if len(ust) == len(maze.get_nodes()):
-                    return maze
+                    break
 
                 # Reset walk for next iteration
                 reset_walk = True
@@ -59,7 +59,22 @@ class WilsonsGenerator(Generator):
 
                 current_node = neighbor
 
-        return None
+        # Adding random edges for multiple possible solutions
+        nodes = maze.get_nodes()
+        edges_added = 0
+        while edges_added < additional_edges:
+            node = nodes[random.randint(0,len(nodes)-1)]
+            neighbors = maze.get_node_neighbors(node)
+            while len(neighbors) > 0:
+                neighbor = neighbors[random.randint(0,len(neighbors)-1)]
+                if not maze.has_edge(node,neighbor):
+                    maze.add_edge(node,neighbor)
+                    edges_added += 1
+                    break
+                else:
+                    neighbors.remove(neighbor)    
+
+        return maze
         
     def generate_start_and_goal(self,maze : Maze) -> tuple:
         start = (random.randint(0,maze.get_rows()-1), random.randint(0,maze.get_cols()-1))

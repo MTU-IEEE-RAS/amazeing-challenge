@@ -4,7 +4,7 @@ from .generators.wilsons_generator import WilsonsGenerator
 
 generator = WilsonsGenerator()
 
-maze = generator.generate_maze(9,5,5)
+maze = generator.generate_maze(seed=None,rows=5,cols=5,additional_edges=5)
 
 maze.print_maze()
 print(generator.generate_start_and_goal(maze))
