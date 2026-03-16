@@ -16,10 +16,19 @@ class Tester:
         return (False,-1)
 
     def validate_solution(self, maze : Maze, start, goal, solution : list) -> tuple:
-
-        if len(solution) < 1:
+        
+        if isinstance(solution, tuple): # Tuple[List, float]
+            solution, path_length = solution
+        elif isinstance(solution, list):
+            if len(solution) < 1:
+                return self.report_failure()
+            # Don't count starting point as a step
+            path_length = len(solution) - 1
+        else:
             return self.report_failure()
-            
+        
+        if solution is None or path_length is None:
+            return self.report_failure()
 
         if start != solution[0] or goal != solution[-1]:
             return self.report_failure()
@@ -27,9 +36,7 @@ class Tester:
         for i in range(0,len(solution)-1):
             if not maze.has_edge(solution[i],solution[i+1]):
                 return self.report_failure()
-
-        # Don't count starting point as a step
-        path_length = len(solution) - 1
+            
         return (True, path_length)
 
     def test(self,input_maze_config=(None,(None,None))) -> dict:
@@ -40,7 +47,7 @@ class Tester:
 
         maze, (start,goal) = input_maze_config
 
-        if type(maze) != Maze:
+        if type(maze) is None:
             maze = self.generator.generate_maze()
             (start,goal) = self.generator.generate_start_and_goal(maze)
 
@@ -48,11 +55,13 @@ class Tester:
         start_time = time.perf_counter()
         results = []
         try:
+            solver_it = self.solver.solve(maze, start, goal)
             while True:
-                solution = next(iter(self.solver.solve(maze, start, goal)))
+                solution = next(solver_it)
+                print(f"Current Solution: {solution}")
                 end_time = time.perf_counter()
                 results.append({"solution": solution,
-                                "end_time": end_time})
+                                "time_elapsed": end_time - start_time})
         except StopIteration as e:
             pass
             # Finished iterating!
@@ -61,17 +70,16 @@ class Tester:
         for result in results:
             # Check validity of solution, generate statistics
             (is_valid_solution, path_length) = self.validate_solution(maze,start,goal,result["solution"])
-            time_elapsed = result["end_time"] - start_time
 
             evaluation = {'maze' : maze,
                     'solution' : result["solution"],
                     'is_valid_solution' : is_valid_solution,
-                    'time_elapsed' : time_elapsed,
+                    'time_elapsed' : result["time_elapsed"],
                     'path_length' : path_length}
 
             if self.verbose and evaluation['is_valid_solution']:
-                print(f"Elapsed Time:  {results['time_elapsed']}")
-                print(f"Path Length:   {results['path_length']}")
+                print(f"Elapsed Time:  {result['time_elapsed']}")
+                print(f"Path Length:   {path_length}")
             evals.append(evaluation)
 
         return evals

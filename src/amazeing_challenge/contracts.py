@@ -20,7 +20,7 @@ class Maze(ABC):
     @abstractmethod
     def get_edges(self,n) -> list:
         pass
-
+    
 class Generator(ABC):
     """Abstract class for Maze Generators
     """
