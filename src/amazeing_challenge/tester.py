@@ -58,7 +58,6 @@ class Tester:
             solver_it = self.solver.solve(maze, start, goal)
             while True:
                 solution = next(solver_it)
-                print(f"Current Solution: {solution}")
                 end_time = time.perf_counter()
                 results.append({"solution": solution,
                                 "time_elapsed": end_time - start_time})
