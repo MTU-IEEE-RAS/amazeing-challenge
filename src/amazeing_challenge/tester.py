@@ -3,7 +3,13 @@ from .contracts import Generator, Solver, Maze
 
 
 class Tester:
+    """Tests a maze solver and reports statistics.
 
+    Args:
+        generator: A generator to create mazes, starts, and goals.
+        solver: The solver being tested.
+        verbose: A boolean to print debug and solver statistics.
+    """
     def __init__(self, generator : Generator, solver : Solver, verbose : bool):
         self.generator = generator
         self.solver = solver
@@ -16,6 +22,17 @@ class Tester:
         return (False,-1)
 
     def validate_solution(self, maze : Maze, start, goal, solution : list) -> tuple:
+        """Check that a solution to a given maze, start, and goal is valid.
+
+        Args:
+            mase: The input maze.
+            start: The beginning waypoint.
+            goal: The end waypoint.
+            solution: A list of steps from start to goal.
+
+        Returns:
+        A tuple containing a boolean indicating a valid solution and an number for the path length.
+        """
         
         if isinstance(solution, tuple): # Tuple[List, float]
             solution, path_length = solution
@@ -42,6 +59,9 @@ class Tester:
     def test(self,input_maze_config=(None,(None,None))) -> dict:
         """
         Tests a solver on a given or generated maze configuration
+
+        Args:
+            input_maze_config: A tuple of the form (maze, (start, goal)).
         """
         # Generate maze
 

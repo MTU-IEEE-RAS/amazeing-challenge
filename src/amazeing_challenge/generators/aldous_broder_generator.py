@@ -5,6 +5,16 @@ import random
 class AldousBroderGenerator(Generator):
 
     def generate_maze(self,seed=None,rows=5,cols=5) -> Maze:
+        """Generate a maze.
+
+        Args:
+            seed: Seed for the random sampling.
+            rows: the number of grid rows in a maze.
+            cols: the number of columns in a maze.
+
+        Returns:
+            A maze.
+        """
 
         maze = AdjacencyListMaze(rows,cols)
 
@@ -30,7 +40,20 @@ class AldousBroderGenerator(Generator):
         return maze
         
 
-    def generate_start_and_goal(self,maze : Maze) -> tuple:
+    def generate_start_and_goal(self,maze : Maze, seed=None) -> tuple:
+        """Generate a start and goal point for a given maze.
+
+        Args:
+            maze: The maze with which to generate a start and goal point.
+            seed: A seed for random sampling.
+
+        Returns:
+            a tuple containing (start, goal).
+        """
+
+        if seed != None:
+            random.seed(seed)
+        
         start = (random.randint(0,maze.get_rows()-1), random.randint(0,maze.get_rows()-1))
         end = (random.randint(0,maze.get_rows()-1), random.randint(0,maze.get_rows()-1))
         return (start,end)
