@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import time
-from typing import Iterator, List
+from typing import Iterator, List, Tuple
 
 class Maze(ABC):
     """Abstract Class for Maze
@@ -51,7 +51,7 @@ class Solver:
     """
 
     @abstractmethod
-    def solve(self, maze : Maze, start, goal) -> Iterator[List]:
+    def solve(self, maze : Maze, start, goal) -> Iterator[List[Tuple[int,int]]]:
         """Give a maze, a start, and an goal point, create a valid path to the start and end.
         """
         pass
