@@ -109,7 +109,6 @@ class AdjacencyListMaze(Maze):
     def get_nodes(self) -> list:
         """Return a list of the nodes.
         """
-
         node_list = []
         for i in range(self.node_count):
             node_list.append(self.get_node_coordinate(i))

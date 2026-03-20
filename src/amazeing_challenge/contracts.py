@@ -32,7 +32,7 @@ class Maze(ABC):
     
     @abstractmethod
     def get_nodes(self) -> list:
-        """Get nodes in the maze.
+        """Returns a list of all nodes in the maze.
         """
         pass
     
