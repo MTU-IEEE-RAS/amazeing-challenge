@@ -56,7 +56,6 @@ class AdjacencyListMaze(Maze):
             A list of edges [(node 1, node 2),...].
         """
         edges = []
-        print(self.adjacency_list[self.get_adj_list_idx(n)])
         for v in self.adjacency_list[self.get_adj_list_idx(n)]:
             n2 = self.get_node_coordinate(v)
             edges.append([n,n2])
