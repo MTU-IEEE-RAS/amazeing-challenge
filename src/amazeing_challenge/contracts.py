@@ -30,6 +30,12 @@ class Maze(ABC):
         """
         pass
     
+    @abstractmethod
+    def get_nodes(self) -> list:
+        """Get nodes in the maze.
+        """
+        pass
+    
 class Generator(ABC):
     """Abstract class for Maze Generators
     """
