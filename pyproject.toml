@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "amazeing_challenge"
+version = "0.0.1"
+authors = [
+    { name="Logan Schexnaydre", email="lpschexn@mtu.edu" },
+    { name="Chaz Cornwall", email="cbcornwa@mtu.edu" },
+    { name="Reid Beckes", email="rabeckes@mtu.edu" },
+    { name="Sean McKenzie", email="smmckenz@mtu.edu" },
+]
+description = "Maze creation and solving package"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+dependencies = []  # e.g. ["requests>=2.28"]
+
+[tool.setuptools.packages.find]
+where=["src"]
